@@ -6,5 +6,5 @@ __pycache__/
 docs/_sources/*
 
 # Test data
-Brown/*
+**/Brown/*
 brown.zip

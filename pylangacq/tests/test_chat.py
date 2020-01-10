@@ -33,7 +33,7 @@ def almost_equal(x, y, tolerance):
 
 
 @pytest.mark.skipif(
-    "CI" not in os.environ,
+    "CI" in os.environ,
     reason="assuming Brown/ available, speed up local dev "
     "for running tests without download",
 )
