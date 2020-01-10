@@ -222,8 +222,8 @@ class Reader(object):
 
         self._fname_to_reader = {}
         for fn in self._filenames:
-            # TODO rewrite what _SingleReader takes as args
-            self._fname_to_reader[fn] = _SingleReader(
+            # TODO rewrite what SingleReader takes as args
+            self._fname_to_reader[fn] = SingleReader(
                 fn, encoding=self.encoding
             )
 
@@ -943,7 +943,7 @@ class Reader(object):
             return output_list
 
 
-class _SingleReader(object):
+class SingleReader(object):
     """A class for reading a single CHAT file."""
 
     def __init__(self, filename=None, str_=None, encoding=ENCODING):
@@ -952,7 +952,7 @@ class _SingleReader(object):
 
         if (filename and str_) or (filename is None and str_ is None):
             msg = (
-                "_SingleReader is initialized by either one CHAT file or "
+                "SingleReader is initialized by either one CHAT file or "
                 "one CHAT str (but not both)"
             )
             raise ValueError(msg)

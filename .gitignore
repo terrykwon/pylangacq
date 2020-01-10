@@ -1,6 +1,7 @@
 *.egg-info/
 .pytest_cache/
 dist/
+__pycache__/
 
 docs/_sources/*
 
