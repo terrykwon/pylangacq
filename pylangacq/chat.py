@@ -1413,7 +1413,9 @@ class SingleReader(object):
                                     i,
                                     self.filename(),
                                 ) + str(e)
-                                raise ValueError(msg)
+                                # raise ValueError(msg)
+                                print(msg)
+                                continue
                             output.append(
                                 (
                                     tier_marker,
