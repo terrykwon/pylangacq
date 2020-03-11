@@ -1012,28 +1012,30 @@ class SingleReader(object):
         """
         previous_line = ""
 
-        for line in self._get_file_object():
-            previous_line = previous_line.strip()
-            current_line = line.rstrip()  # don't remove leading \t
+        with self._get_file_object() as file_object:
+#        for line in self._get_file_object():
+            for line in file_object:
+                previous_line = previous_line.strip()
+                current_line = line.rstrip()  # don't remove leading \t
 
-            if not current_line:
-                continue
+                if not current_line:
+                    continue
 
-            if current_line.startswith("%xpho:") or current_line.startswith(
-                "%xmod:"
-            ):
-                current_line = current_line.replace("%x", "%", 1)
+                if current_line.startswith("%xpho:") or current_line.startswith(
+                    "%xmod:"
+                ):
+                    current_line = current_line.replace("%x", "%", 1)
 
-            if previous_line and current_line.startswith("\t"):
-                previous_line = u"{} {}".format(
-                    previous_line, current_line.strip()
-                )  # strip \t
-            elif previous_line:
-                yield previous_line
-                previous_line = current_line
-            else:  # when it's the very first line
-                previous_line = current_line
-        yield previous_line  # don't forget the very last line!
+                if previous_line and current_line.startswith("\t"):
+                    previous_line = u"{} {}".format(
+                        previous_line, current_line.strip()
+                    )  # strip \t
+                elif previous_line:
+                    yield previous_line
+                    previous_line = current_line
+                else:  # when it's the very first line
+                    previous_line = current_line
+            yield previous_line  # don't forget the very last line!
 
     def _tier_markers(self):
         """Determine what the %-tiers are."""
